@@ -1,0 +1,9 @@
+backend
+dist
+dotnet_sdk
+frontend
+java_sdk
+logs/*
+node_modules
+*.pid
+*.log

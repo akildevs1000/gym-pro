@@ -1,0 +1,98 @@
+{
+  "name": "gym-pro",
+  "version": "1.0.0",
+  "description": "gym-pro",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "publish": {
+      "provider": "generic",
+      "url": "https://backend.gym-pro.com/desktop_updates/"
+    },
+    "appId": "desktop.gym-pro",
+    "files": [
+      "assets/**/*",
+      "helpers.js",
+      "updater.js",
+      "index.html",
+      "main.js"
+    ],
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets"
+      },
+      {
+        "from": "conf",
+        "to": "conf"
+      },
+      {
+        "from": "frontend/dist",
+        "to": "frontend/dist"
+      },
+      {
+        "from": "logs",
+        "to": "logs"
+      },
+      {
+        "from": "temp",
+        "to": "temp"
+      },
+      {
+        "from": "contrib",
+        "to": "contrib"
+      },
+      {
+        "from": "docs",
+        "to": "docs"
+      },
+      {
+        "from": "nginx.exe",
+        "to": "nginx.exe"
+      },
+      {
+        "from": "backend",
+        "to": "backend"
+      },
+      {
+        "from": "dotnet_sdk",
+        "to": "dotnet_sdk"
+      },
+      {
+        "from": "java_sdk",
+        "to": "java_sdk"
+      }
+    ],
+    "productName": "GymPro",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "icon": "frontend/dist/favicon-256x256.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "license": "license.txt",
+      "createDesktopShortcut": true
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "electron-updater": "^6.6.2",
+    "simple-git": "^3.28.0",
+    "ws": "^8.18.3"
+  }
+}
