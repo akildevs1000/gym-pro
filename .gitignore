@@ -2,7 +2,7 @@ dist
 dotnet_sdk
 frontend/dist
 frontend/www
-backend
+# backend
 java_sdk
 logs/*
 node_modules
