@@ -1,0 +1,43 @@
+[
+  {
+    "name": "United Arab Emirates",
+    "slug": "united-arab-emirates",
+    "states": [
+      {
+        "name": "Abu Dhabi",
+        "code": "AZ",
+        "cities": ["Abu Dhabi", "Al Ain", "Madinat Zayed", "Ruwais"]
+      },
+      {
+        "name": "Dubai",
+        "code": "DU",
+        "cities": ["Dubai", "Jebel Ali", "Hatta"]
+      },
+      {
+        "name": "Sharjah",
+        "code": "SH",
+        "cities": ["Sharjah", "Khor Fakkan", "Dibba Al-Hisn"]
+      },
+      {
+        "name": "Ajman",
+        "code": "AJ",
+        "cities": ["Ajman", "Manama", "Masfout"]
+      },
+      {
+        "name": "Umm Al Quwain",
+        "code": "UQ",
+        "cities": ["Umm Al Quwain"]
+      },
+      {
+        "name": "Ras Al Khaimah",
+        "code": "RK",
+        "cities": ["Ras Al Khaimah", "Digdaga", "Al Rams"]
+      },
+      {
+        "name": "Fujairah",
+        "code": "FJ",
+        "cities": ["Fujairah", "Dibba", "Masafi"]
+      }
+    ]
+  }
+]

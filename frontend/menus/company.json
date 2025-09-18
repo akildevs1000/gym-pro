@@ -1,0 +1,118 @@
+[
+  {
+    "icon": "mdi-view-dashboard",
+    "title": "Dashboard",
+    "to": "/dashboard",
+    "submenu": "dashboard",
+    "menu": "branch_access",
+    "module": "dashboard"
+  },
+  {
+    "icon": "mdi-account-tie",
+    "title": "Members",
+    "to": "/members",
+    "menu": "members_access",
+    "submenu": "members",
+    "module": "dashboard"
+  },
+   {
+    "icon": "mdi-camera-account",
+    "title": "Member Photo Upload",
+    "to": "/members_photo_upload",
+    "menu": "setting_access",
+    "class": "submenutitle",
+    "module": "members"
+  },
+  {
+    "icon": "mdi-domain",
+    "title": "Company",
+    "to": "/settings",
+    "menu": "setting_access",
+    "class": "submenutitle",
+    "module": "settings"
+  },
+  {
+    "icon": "mdi-cellphone-text",
+    "title": "Devices",
+    "to": "/device",
+    "menu": "device_access",
+    "module": "settings"
+  },
+  {
+    "icon": "mdi-history",
+    "title": "Activity",
+    "open_menu": false,
+    "to": "/activity",
+    "module": "settings"
+  },
+  {
+    "icon": "mdi-account-tie",
+    "title": "Employees",
+    "to": "/employees",
+    "menu": "employee_access",
+    "module": "employees"
+  },
+  {
+    "icon": "mdi mdi-camera-account",
+    "title": "Employee Upload",
+    "to": "/employee_photo_upload",
+    "menu": "employee_photo_upload",
+    "module": "employees"
+  },
+  {
+    "icon": "mdi-cash-minus",
+    "title": "Expenses",
+    "to": "/expenses",
+    "menu": "logs_access",
+    "module": "accounts"
+  },
+  {
+    "icon": "mdi-cash-plus",
+    "title": "Payments",
+    "to": "/payments",
+    "menu": "logs_access",
+    "module": "accounts"
+  },
+  {
+    "icon": "mdi-clock-time-four",
+    "title": "Reports",
+    "to": "/reports",
+    "menu": "reports",
+    "module": "reports"
+  },
+  {
+    "icon": "mdi-package-variant",
+    "title": "Products",
+    "to": "/products",
+    "menu": "products",
+    "module": "products"
+  },
+  {
+    "icon": "mdi-cash",
+    "title": "Invoices",
+    "to": "/invoices",
+    "menu": "invoices",
+    "module": "products"
+  },
+  {
+    "icon": "mdi-clipboard-text-outline",
+    "title": "Quotations",
+    "to": "/quotations",
+    "menu": "quotations",
+    "module": "products"
+  },
+  {
+    "icon": "mdi-clipboard-text-clock",
+    "title": "Device Logs",
+    "to": "/devicelogs",
+    "menu": "logs_access",
+    "module": "reports"
+  },
+  {
+    "icon": "mdi-history",
+    "title": "Activity",
+    "open_menu": false,
+    "to": "/activity",
+    "module": "reports"
+  }
+]

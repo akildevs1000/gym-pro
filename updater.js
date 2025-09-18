@@ -4,7 +4,7 @@ const { log, notify, } = require('./helpers');
 
 function initAutoUpdater(mainWindow) {
 
-    notify("GymPro", "Application is ready now");
+    notify("MyTime2Desktop", "Application is ready now");
 
     autoUpdater.on('checking-for-update', () => {
         log(mainWindow, '🔍 Checking for update...');

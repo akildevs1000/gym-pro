@@ -1,0 +1,46 @@
+[
+  {
+    "text": "Member",
+    "align": "left",
+    "sortable": false,
+    "filterable": true,
+    "value": "member",
+    "key": "member"
+  },
+  {
+    "text": "Date",
+    "align": "left",
+    "sortable": true,
+    "filterable": false,
+    "value": "date"
+  },
+  {
+    "text": "In Time",
+    "align": "left",
+    "sortable": true,
+    "filterable": true,
+    "value": "in"
+  },
+  {
+    "text": "Out Time",
+    "align": "left",
+    "sortable": true,
+    "filterable": true,
+    "value": "out"
+  },
+  {
+    "text": "Total Hrs",
+    "align": "left",
+    "sortable": true,
+    "filterable": true,
+    "value": "total_hrs"
+  },
+    {
+    "text": "Status",
+    "align": "left",
+    "sortable": true,
+    "filterable": true,
+    "value": "status"
+  },
+  { "text": "Actions", "value": "actions", "sortable": false }
+]

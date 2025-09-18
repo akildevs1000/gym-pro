@@ -1,0 +1,3 @@
+<template>
+  <ReportsAttendance />
+</template>

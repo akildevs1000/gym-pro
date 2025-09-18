@@ -5,10 +5,10 @@ const { spawn } = require('child_process');
 const fs = require("fs")
 const WebSocket = require("ws");
 
-app.setName('GymPro');
-app.setAppUserModelId('GymPro');
+app.setName('MyTime2Desktop');
+app.setAppUserModelId('MyTime2Desktop');
 
-const { log, spawnWrapper, stopProcess, getFormattedDate, ipUpdaterForDotNetSDK, notify, verification_methods, reasons, ipv4Address } = require('./helpers');
+const { log, spawnWrapper,spawnPhpCgiWorker, stopProcess, getFormattedDate, ipUpdaterForDotNetSDK, notify, verification_methods, reasons, ipv4Address } = require('./helpers');
 const { initAutoUpdater } = require('./updater');
 
 const isDev = !app.isPackaged;
@@ -48,7 +48,6 @@ let javaSDKProcess;
 function startWebSocketClient(mainWindow) {
 
   const SOCKET_ENDPOINT = `ws://${ipv4Address}:8080/WebSocket`;
-  const logFilePathAlarm = `./backend/storage/app/alarm/alarm-logs-${getFormattedDate().date}.csv`;
 
   function connect() {
 
@@ -73,8 +72,16 @@ function startWebSocketClient(mainWindow) {
     };
 
     socket.onmessage = ({ data }) => {
-      let logFilePath = `./backend/storage/app/logs-${getFormattedDate().date}.csv`;
       try {
+
+        const storage = path.join(srcDirectory, 'storage', 'app');
+
+        let logFilePath = path.join(storage, `logs-${getFormattedDate().date}.csv`);
+        let logFilePathAlarm = path.join(storage, `alarm-logs-${getFormattedDate().date}.csv`);
+
+        // Ensure directory exists
+        fs.mkdirSync(path.dirname(logFilePath), { recursive: true });
+
         const jsonData = JSON.parse(data).Data;
         const { UserCode, SN, RecordDate, RecordNumber, RecordCode } = jsonData;
 
@@ -96,6 +103,7 @@ function startWebSocketClient(mainWindow) {
         log(mainWindow, "[LISTENER] Error processing message: " + error.message);
       }
     };
+
   }
 
   connect();
@@ -127,8 +135,9 @@ function createWindow() {
 function startServices(mainWindow) {
   const address = `http://${ipv4Address}:3001`;
 
-  spawnWrapper(mainWindow, "[Application]", phpCGi, ['-b', `127.0.0.1:9000`], {
-    cwd: appDir
+  const phpPorts = [9000, 9001, 9002, 9003, 9004];
+  phpPorts.forEach(port => {
+    spawnPhpCgiWorker(mainWindow, phpCGi,port);
   });
 
   NginxProcess = spawnWrapper(mainWindow, "[Nginx]", nginxPath, { cwd: appDir });
@@ -184,16 +193,9 @@ function startServices(mainWindow) {
 }
 
 function stopServices(mainWindow) {
-  stopProcess(mainWindow, ScheduleProcess);
-  stopProcess(mainWindow, QueueProcess);
-  stopProcess(mainWindow, NginxProcess);
-  stopProcess(mainWindow, dotnetSDKProcess);
-  stopProcess(mainWindow, javaSDKProcess);
-
-  const forFullStop = spawn('taskkill', ['/F', '/IM', 'nginx.exe']);
-  forFullStop.on('close', () => {
-    log(mainWindow, '[Application] Server stopped.');
-  });
+  const batFile = path.join(appDir, 'stop-services.bat');
+  spawn('cmd.exe', ['/c', batFile], { windowsHide: true });
+  log(mainWindow, '[Application] stop-services.bat executed.');
 }
 
 app.whenReady().then(() => {
