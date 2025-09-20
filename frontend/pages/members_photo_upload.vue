@@ -919,6 +919,8 @@ export default {
       this.verifySubmitButton();
     },
     async onSubmit() {
+      
+
       this.$refs["UploadPersonRef"]["uploadPersonResponseDialog"] = true;
 
       this.deviceResponses = [];
@@ -934,13 +936,17 @@ export default {
       }
 
       this.errors = [];
+
       for (const item of this.rightMembers) {
         let person = {
           name: `${item.first_name} ${item.last_name}`,
           userCode: parseInt(item.system_user_id),
           profile_picture_raw: item.profile_picture_raw,
           faceImage: item.profile_picture,
+          expiry: item?.last_membership?.plan_end_date + " 00:00:00",
         };
+        
+        console.log("🚀 ~ onSubmit ~ person:", person)
 
         if (item.rfid_card_number) {
           person.cardData = item.rfid_card_number;

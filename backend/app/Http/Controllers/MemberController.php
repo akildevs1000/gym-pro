@@ -41,7 +41,23 @@ class MemberController extends Controller
 
         // Handle profile picture upload
         if ($request->hasFile('profile_picture')) {
-            $payload['profile_picture'] = $this->uploadProfilePicture($request->file('profile_picture'));
+            $file             = $request->file('profile_picture');
+            $payload['profile_picture'] = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('media/member/profile_picture/'), $payload['profile_picture']);
+        }
+
+        // Handle profile picture upload
+        if ($request->hasFile('front')) {
+            $file             = $request->file('front');
+            $payload['front'] = time() . '.jpg';
+            $file->move(public_path('media/member/front/'), $payload['front']);
+        }
+
+        // Handle profile picture upload
+        if ($request->hasFile('back')) {
+           $file             = $request->file('back');
+            $payload['back'] = time() . '.jpg';
+            $file->move(public_path('media/member/back/'), $payload['back']);
         }
 
         DB::beginTransaction();
@@ -59,8 +75,10 @@ class MemberController extends Controller
             DB::commit();
 
             $member->profile_picture = asset('media/member/profile_picture/' . $member->profile_picture);
+            $member->front           = asset('media/member/front/' . $member->front);
+            $member->back            = asset('media/member/back/' . $member->back);
 
-            SendWhatsappMessageJob::dispatch($member->whatsapp_number, Messages::TEMPLATES[Messages::ACCOUNT_CREATED]);
+            // SendWhatsappMessageJob::dispatch($member->whatsapp_number, Messages::TEMPLATES[Messages::ACCOUNT_CREATED]);
 
             return $this->response('Member successfully created.', $member, true);
         } catch (\Exception $e) {
@@ -86,7 +104,6 @@ class MemberController extends Controller
         try {
             $updated = $member->update($data);
 
-
             if (! $updated) {
                 return $this->response('Member cannot update.', null, false);
             }
@@ -97,7 +114,7 @@ class MemberController extends Controller
 
             return $this->response('Member Details successfully updated.', $member, true);
         } catch (\Exception $e) {
-            return $this->response('Member Details successfully updated.',$e->getMessage(), true);
+            return $this->response('Member Details successfully updated.', $e->getMessage(), true);
         }
     }
 

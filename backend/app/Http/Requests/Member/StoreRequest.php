@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Member;
 
 use App\Http\Controllers\Controller;
+use App\Traits\failedValidation;
 use App\Traits\failedValidationWithName;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
 {
-    use failedValidationWithName;
+    use failedValidation;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -45,6 +46,8 @@ class StoreRequest extends FormRequest
             'plan_end_date' => ['required'],
             'plan_id' => ['required'],
             'profile_picture' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:2048', 'sometimes', 'nullable'],
+            'front' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:2048', 'sometimes', 'nullable'],
+            'back' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:2048', 'sometimes', 'nullable'],
 
             'payment_mode_id'  => ['required', 'exists:payment_modes,id'],
             'payment_mode_ref' => ['nullable', 'string', 'max:191'],

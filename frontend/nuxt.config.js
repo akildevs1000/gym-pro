@@ -139,6 +139,9 @@ export default {
           // Custom
           glow: "#3d5afe",
           violet: "#6c63ff",
+
+          input_bg: "#374151",
+          dialog_bg: "#1f2937"
         },
         light: {
           primary: "#6946dd",         // Violet (your original)
@@ -162,6 +165,8 @@ export default {
           // Custom
           glow: "#6946dd",
           violet: "#6946dd",
+          input_bg: "#374151",
+          dialog_bg: "#1f2937"
         }
       }
     }

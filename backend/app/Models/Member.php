@@ -17,6 +17,8 @@ class Member extends Model
         'whatsapp_number',
         'date_of_birth',
         'profile_picture',
+        'front',
+        'back',
     ];
 
     protected $casts = [
@@ -25,9 +27,15 @@ class Member extends Model
 
     protected $appends = [
         'profile_picture_raw',
+        'front_raw',
+        'back_raw',
         'name_with_user_id',
         'full_name',
         'profile_picture_base64',
+
+        'front_base64',
+        'back_base64',
+
         'last_membership',
     ];
 
@@ -71,6 +79,28 @@ class Member extends Model
 
     }
 
+    public function getFrontAttribute($value)
+    {
+        if (! $value) {
+            return null;
+        }
+
+        return asset('media/member/front/' . $value);
+        // return asset(env('BUCKET_URL') . '/' . $value);
+
+    }
+
+    public function getBackAttribute($value)
+    {
+        if (! $value) {
+            return null;
+        }
+
+        return asset('media/member/back/' . $value);
+        // return asset(env('BUCKET_URL') . '/' . $value);
+
+    }
+
     public function getProfilePictureBase64Attribute()
     {
         return null;
@@ -85,6 +115,16 @@ class Member extends Model
         return null;
     }
 
+    public function getFrontBase64Attribute()
+    {
+        return null;
+    }
+
+    public function getBackBase64Attribute()
+    {
+        return null;
+    }
+
     public function getProfilePictureRawAttribute()
     {
         // Ensure profile_picture exists and is not empty
@@ -96,6 +136,34 @@ class Member extends Model
         $arr = explode('media/member/profile_picture/', $this->profile_picture);
 
         // Return the part after 'media/member/profile_picture/' or an empty string if not found
+        return isset($arr[1]) ? $arr[1] : '';
+    }
+
+    public function getFrontRawAttribute()
+    {
+        // Ensure profile_picture exists and is not empty
+        if (empty($this->front)) {
+            return ''; // Return an empty string if front is not set
+        }
+
+        // Split the path string
+        $arr = explode('media/member/front/', $this->front);
+
+        // Return the part after 'media/member/front/' or an empty string if not found
+        return isset($arr[1]) ? $arr[1] : '';
+    }
+
+    public function getBackRawAttribute()
+    {
+        // Ensure profile_picture exists and is not empty
+        if (empty($this->back)) {
+            return ''; // Return an empty string if back is not set
+        }
+
+        // Split the path string
+        $arr = explode('media/member/back/', $this->back);
+
+        // Return the part after 'media/member/back/' or an empty string if not found
         return isset($arr[1]) ? $arr[1] : '';
     }
 
